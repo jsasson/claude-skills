@@ -31,7 +31,7 @@ You need an existing session you can reach — via the Claude desktop app, claud
 Copy `new-tab.md` to your global Claude commands directory:
 
 ```bash
-cp new-tab.md ~/.claude/commands/new-tab.md
+cp new-tab/new-tab.md ~/.claude/commands/new-tab.md
 ```
 
 Create the directory first if it doesn't exist:
