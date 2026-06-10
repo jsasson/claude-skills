@@ -33,11 +33,11 @@ ps aux | grep -iE "iTerm2|Terminal\.app|Warp|Alacritty|Hyper" | grep -v grep | h
 
 Substitute `TARGET_DIR` with the confirmed path.
 
-**Terminal.app**:
+**Terminal.app**: Write to a temp file and execute to avoid shell escaping issues:
 ```bash
-osascript -e 'tell application "Terminal" to do script "cd TARGET_DIR && claude"'
+printf 'tell application "Terminal" to do script "cd TARGET_DIR && claude"\n' > /tmp/open_claude.scpt
+osascript /tmp/open_claude.scpt
 ```
-Note: omitting `in front window` is intentional — it opens a new window rather than running in the current tab.
 
 **iTerm2**:
 ```bash
