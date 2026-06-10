@@ -33,20 +33,22 @@ ps aux | grep -iE "iTerm2|Terminal\.app|Warp|Alacritty|Hyper" | grep -v grep | h
 
 Substitute `TARGET_DIR` with the confirmed path.
 
-**Terminal.app**: Write to a temp file and execute to avoid shell escaping issues:
+**Terminal.app**: Use a shell variable for the path, then write to a temp file and execute:
 ```bash
-printf 'tell application "Terminal" to do script "cd TARGET_DIR && claude"\n' > /tmp/open_claude.scpt
+TARGET_DIR="/the/confirmed/absolute/path"
+printf 'tell application "Terminal" to do script "cd %s && claude"\n' "$TARGET_DIR" > /tmp/open_claude.scpt
 osascript /tmp/open_claude.scpt
 ```
 
-**iTerm2**:
+**iTerm2**: Use a shell variable for the path:
 ```bash
-osascript << 'EOF'
+TARGET_DIR="/the/confirmed/absolute/path"
+osascript << EOF
 tell application "iTerm2"
   tell current window
     set newTab to (create tab with default profile)
     tell current session of newTab
-      write text "cd TARGET_DIR && claude"
+      write text "cd $TARGET_DIR && claude"
     end tell
   end tell
 end tell
