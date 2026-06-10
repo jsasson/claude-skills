@@ -35,8 +35,9 @@ Substitute `TARGET_DIR` with the confirmed path.
 
 **Terminal.app**:
 ```bash
-osascript -e 'tell application "Terminal" to do script "cd TARGET_DIR && claude" in front window'
+osascript -e 'tell application "Terminal" to do script "cd TARGET_DIR && claude"'
 ```
+Note: omitting `in front window` is intentional — it opens a new window rather than running in the current tab.
 
 **iTerm2**:
 ```bash
